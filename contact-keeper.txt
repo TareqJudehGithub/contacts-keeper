@@ -13,8 +13,8 @@
      F. $ npm install mongoose   //MongoDB extractor
 
 5. Dev dependencies:
-     A. $ npm install nodemon
-     B. $ npm install concurrently   //run our back in the frontend react server.
+     A. $ npm install -D nodemon
+     B. $ npm install -D concurrently   //run our back in the frontend react server.
 
 6. Create a a new file server.js
  insdie server.js:
