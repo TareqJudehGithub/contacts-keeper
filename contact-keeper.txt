@@ -27,3 +27,13 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server up and running on PORT ${PORT}`));
 
 then run: $ npm run server
+
+
+config folder
+inside:
+     - default.json    a file for global variables. Its part of config package
+     we installed at the begining.
+     default.json contains the MongoDB URI link from the project cluster.
+
+     -db.js  this is the file where we connect Mongoose to our DB.
+
