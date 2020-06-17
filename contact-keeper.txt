@@ -6,7 +6,7 @@
 
 4. dependencies:
      A. $ npm install express
-     B. $ npm install bcrypt           //pass hashing
+     B. $ npm install bcryptjs           //pass hashing
      C. $ npm install jsonwebtoken    //authentication
      D. $ npm install config            //for global variables
      e. $ npm install express-validator //validates any data coming in.
@@ -53,3 +53,17 @@ inside:
 //           process.exit(1);
 //      });
 // };
+
+
+models
+User.js
+Add User.js to routes/users
+
+Express-validator is a tool to make sure certain things are sent.
+
+Add this line to /routesusers.js:
+
+// ...rest of the initial code omitted for simplicity.
+const { check, validationResult } = require('express-validator');
+
+bcryptjs for hashing/incrypting pass
