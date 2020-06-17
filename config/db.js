@@ -18,21 +18,3 @@ const connectDB = async() => {
      }
 };
 module.exports = connectDB;
-
-
-
-//Promises:
-
-// const connectDB = () => {
-//      mongoose.connect(db, {
-//           useNewUrlParser: true,
-//           useCreateIndex: true,
-//           useFindAndModify: false,
-//           useUnifiedTopology: true
-//      })
-//      .then(() => console.log("MongoDB is connected!"))
-//      .catch(err => {
-//           console.log(err.message);
-//           process.exit(1);
-//      });
-// };
