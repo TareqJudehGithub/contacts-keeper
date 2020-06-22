@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-
 const { check, validationResult } = require('express-validator');
-
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const User = require("../models/User");
 
@@ -14,8 +14,8 @@ const User = require("../models/User");
 router.post("/", [
      
      check("name", "Please enter a valid name.")
-          .not()      // not validation
-          .isEmpty(), // empty validation
+          .not()      // the not empty validation
+          .isEmpty(), 
 
      check("email", "Please enter a valid email address.")
           .isEmail(),
@@ -35,7 +35,8 @@ router.post("/", [
                if(user) { // if User email already exists
                     return res.status(400).json({ msg: "User already exists" });
                }
-               user = new User({ //create a new user
+               //create a new user
+               user = new User({ 
                   name: name,
                   email: email,
                   password: password
@@ -47,11 +48,27 @@ router.post("/", [
 
                await user.save(); // saving user in MongoDB
 
-               res.status(200).json("User successfully saved!");
+              // JWT payload
+               const payload = {
+                    user: {
+                         id: user.id
+                    }
+               }
+               // generating a token
+               jwt.sign(
+                    payload, 
+                    config.get("jwtSecret"),
+                    {
+                         expiresIn: 360000   // token expiry
+                    },
+                    (err, token) => {
+                         if(err) throw err;
+                         res.json({ token });
+                    });
           } 
           catch (error) {
-               console.log(error.message);
-               res.status(500).send("Error creating new user!");
+               console.error(error.message);
+               res.status(500).json("ServerError! Error creating new user!");
           };
 });
 

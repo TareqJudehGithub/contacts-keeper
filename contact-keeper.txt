@@ -59,11 +59,96 @@ models
 User.js
 Add User.js to routes/users
 
+User registeration in Node.js:
+
+1. creating u user register route in users.js:
+
+const express = require("express");
+const router = express.Router;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { check, validationResult} = require("express-validator");
+const config = require("config");
+const User = require("../models/User");
+
+router.post("/", [
+
+2. To include Express-Validator in the user register route:
+
+     check("name", "Error msg")
+          .not()
+          .isEmpty(),
+     check("email, "Error Msg")
+          .isEmail(),
+     check("password", "Error Msg")
+          .isLength({ min: 6, max: 15})
+     ], 
+     async (req, res) => {
+
+          const errors =  validationResult(req);
+          if(!errors.isEmpty()){
+               return res.status(400).json({ errors: errors.array() });
+          }
+          const {name, email, password } = req.body;
+          
+          try {
+
+               let user =  await user.findOne({ email: email });
+               if(user) {
+                    res.status(400).json("User already exists");
+               }
+               user = new User({
+                    name: name,
+                    email: email,
+                    password: password
+               })
+3. Hash/incrypt the user password:
+               const salt = await bcrypt.getSalt(10);
+               user.password = await bcrypt.hash(password, salt);
+
+               user.save()
+
+4. To include JWT in the user register route:
+               payload: {
+                    id: user.id
+               }
+               jwt.sign(
+                    payload,
+                    config.get("jwtSecret"),
+                    {
+                         expiresIn: 3600
+                    },  
+                    (err, token) => {
+                         if(err) throw err;
+                         res.json({ token })
+                    }
+               )
+          }
+          catch (error){
+               console.log(error.message)
+               res.status(500).json("Error registering user!");
+          }
+});
+
+module.exports = router;
+
+
+
+
 Express-validator is a tool to make sure certain things are sent.
 
 Add this line to /routesusers.js:
 
-// ...rest of the initial code omitted for simplicity.
-const { check, validationResult } = require('express-validator');
 
-bcryptjs for hashing/incrypting pass
+Jason Web Token  (JWT)
+
+What is JSON Web Token?
+JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA or ECDSA.
+r
+$ npm install jsonwebtoken
+
+in users.js
+
+const jwt = require("jsonwebtoken");
+
+ //JWT creating payload (object being sent in the token)
