@@ -14,16 +14,16 @@ const auth = require("../middleware/auth");
 // @desc       GET  logged in user
 // @access     Private
 
-router.get("/", auth, async(req, res) => {
+router.get("/", auth, async (req, res) => {
      try {
           const user = await User
                .findById(req.user.id)
-               .select("-password")  //don't return the password
+               .select("-password")  
                res.json(user);
      } 
      catch (error) {
           console.log(error.message);
-          res.status(500).json(" Server Error! GET /api/users");
+          res.status(500).json(" Server Error! GET /api/auth");
      }
 });
 
@@ -50,13 +50,13 @@ router.post("/",
                res.status(400).json({ msg: "User does not exist!"});
           }
           // check password using bcyptjs, by comparing (plain, hashed) pass
-          const isMatch = await bcrypt.compare(password, user.password) 
+          const isMatch = await bcrypt.compare(password, user.password); 
           if(!isMatch) {
                return res.status(400).json({ msg: "Invalid username or password!"});
           }
           const payload = {
                user: {
-                     id: user.id   // from the user in the db  (User.findOne() )
+                     id: user.id   
                }
           };
 
