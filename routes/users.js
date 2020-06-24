@@ -7,6 +7,10 @@ const config = require("config");
 
 const User = require("../models/User");
 
+router.get("/", async(req, res) => {
+     const users = await User.find();
+     res.json(users);
+})
 
 // @route      POST      api/users
 // @desc       Register a user
