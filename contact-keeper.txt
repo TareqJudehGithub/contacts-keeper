@@ -152,3 +152,42 @@ in users.js
 const jwt = require("jsonwebtoken");
 
  //JWT creating payload (object being sent in the token)
+
+const payload = {
+     id: user.id
+}
+jwt.sign(
+     payload,
+     config.get("jwtSecret"),
+     {
+          expiresIn:  3600
+     },
+     (error, token) => {
+          if(error) throw error;
+          res.js({ token });
+     }
+)
+
+Building the Front-End:
+
+A. Install React
+B. Install concurrently
+     concurrently gives us the ability to run more than 1 terminal in the same time.
+
+     In package.json in the backend project folder:
+     under scripts:
+     scripts: {
+          "server": "nodemon server.js",
+          client: "npm start --prefix client",
+          "clientinstall": "npm install --prefix client",
+          "dev": "concurrently \"npm run server\" \"npm run client\""
+     }
+C. In package.json in the frontend project folder (client):
+At the bottom add:
+{
+     "proxy": "http://localhost:5000"
+}
+
+D. At last, in the project terminal, run:  $npm run dev
+
+

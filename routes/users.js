@@ -6,7 +6,11 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 const User = require("../models/User");
+const auth = require("../middleware/auth");
 
+// @route      GET      api/users
+// @desc       get all users
+// @access     Public
 router.get("/", async(req, res) => {
      const users = await User.find();
      res.json(users);
@@ -75,5 +79,69 @@ router.post("/", [
                res.status(500).json("ServerError! Error creating new user!");
           };
 });
+
+// @route      PUT      api/users/:id
+// @desc       Edit a user
+// @access     Private
+router.put("/:id", auth, async(req, res) => {
+     const { name, email, password } = req.body;
+    
+     // Build user object:
+     const userFields = {};
+
+     if(name) userFields.name = name;
+     if(email) userFields.email = email;
+     if(password) userFields.password = password;
+
+     try {
+          let user = await User.findById(req.params.id);
+          if(!user){
+               return res.status(404).json({ msg: "Error 404! User not found!"});               
+          }
+          if(user.id !== req.user.id){
+               return res.status(401).json({ msg: "This action is not authorized!" });               
+          }
+          user = await User
+               .findByIdAndUpdate(
+                    req.params.id,
+                    {$set: userFields},
+                    {new: true}
+               )
+               res.json(user);
+
+     } catch (error) {
+          console.log(error.message);
+          res.status(500).json("Server Error 500! Edit user failed!");
+     }
+});
+
+
+
+
+
+// @route      POST      api/users/:id
+// @desc       Delete a user
+// @access     Private
+router.delete("/:id", auth, async(req, res) => {
+     const { name } = req.body;
+     try {
+          let user = await User.findById(req.params.id);
+
+          if(!user){
+               return res.status(404).json({ msg: "Error! User not found!"});
+          }
+          if(user.id === req.user.id){
+               res.status(401).json({ msg: "Error 401! User Cannot delete his/her own account!"});
+               return;
+          }
+          await User.findByIdAndRemove(req.params.id);
+          res.json({msg: `${name} was successfully deleted!`});
+     } 
+     catch (error) {
+          console.log(error.message);
+          res.status(500).json({ msg: "Delete user failed!"});
+     }
+})
+
 
 module.exports = router;

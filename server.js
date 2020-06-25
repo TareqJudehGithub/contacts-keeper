@@ -3,7 +3,7 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-// Connect Database
+// Connect and init MongoDB
 connectDB();
 
 //init Middleware
@@ -11,7 +11,7 @@ app.use(express.json())
 
 
 app.get("/", (req, res) => {
-     res.json({ msg: "<h1>Hello World!</h2>"});
+     res.json({ msg: "<h1>Hello Express!</h2>"});
 })
 
 //routes
