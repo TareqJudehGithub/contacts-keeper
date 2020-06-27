@@ -14,10 +14,10 @@
 
 5. Dev dependencies:
      A. $ npm install -D nodemon
-     B. $ npm install -D concurrently   //run our back in the frontend react server.
+     B. $ npm install -D concurrently  //run our back in the frontend react server.
 
 6. Create a a new file server.js
- insdie server.js:
+ inside server.js:
 
 const express = require("express");
 const app = express();
@@ -191,8 +191,9 @@ At the bottom add:
 D. At last, in the project terminal, run:  $npm run dev
 
 In /client folder, we need to install the following dependencies:
- $ npm install axios
- $ npm install react-router-dom
- $ npm install uuid    // ID generator
-  $ npm install react-transition-group  //Animator
+$ npm install axios
+$ npm install react-router-dom
+$ npm install uuid                          // ID generator
+$ npm install react-transition-group       //Animator
+
 
