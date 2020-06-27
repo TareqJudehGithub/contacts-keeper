@@ -190,4 +190,9 @@ At the bottom add:
 
 D. At last, in the project terminal, run:  $npm run dev
 
+In /client folder, we need to install the following dependencies:
+ $ npm install axios
+ $ npm install react-router-dom
+ $ npm install uuid    // ID generator
+  $ npm install react-transition-group  //Animator
 

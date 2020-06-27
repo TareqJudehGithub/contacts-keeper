@@ -12,7 +12,8 @@ const auth = require("../middleware/auth");
 // @desc       get all users
 // @access     Public
 router.get("/", async(req, res) => {
-     const users = await User.find();
+
+     const users = await User.find().sort({ date: -1});
      res.json(users);
 })
 
@@ -135,7 +136,7 @@ router.delete("/:id", auth, async(req, res) => {
                return;
           }
           await User.findByIdAndRemove(req.params.id);
-          res.json({msg: `${name} was successfully deleted!`});
+          res.json({msg: `User was successfully deleted!`});
      } 
      catch (error) {
           console.log(error.message);

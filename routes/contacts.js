@@ -124,7 +124,8 @@ router.delete("/:id", auth, async (req, res) => {
 
      }
       catch (error) {
-          
+          console.log(error.message);
+          res.status(500).json("Server Error 500! Delete user failed!");
      }
 });
 
