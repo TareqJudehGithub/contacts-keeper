@@ -11,7 +11,7 @@ const Contacts = () => {
                {contacts.map(contact => 
                               <ContactItems 
                               key={contact.id}
-                              contactItems={contact}
+                              contact={contact}
                               />
                          )}
           </React.Fragment>

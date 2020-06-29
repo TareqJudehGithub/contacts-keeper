@@ -1,19 +1,33 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
 
 
 const ContactForm = () => {
 
      const contactContext = useContext(ContactContext);
-     const { contacts } = contactContext;
+     const { addContact, updateContact, current, clearCurrent } = contactContext;
      const [contact, setContact] = useState({
           name: "",
           email: "",
           phone: "",
           type: "personal"
      });
-
      const { name, email, phone, type } = contact;
+     
+     useEffect(() => {
+          if(current !== null) {
+               setContact(current);
+          }
+          else{
+               setContact({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    type: "personal"
+               });
+          }
+     }, [contactContext, current]);
+
 
      const onChangeHandler = (event) => {
           const { name, value } = event.target;
@@ -22,21 +36,32 @@ const ContactForm = () => {
                [name]: value 
           });
      };
-     const onSubmitHandler = (event) => {
-          
-          event.preventDefault();
-          contactContext.addContact(contact);
-          setContact({
-               name: "",
-               email: "",
-               phone: "",
-               type: "personal"
-          });
+     const clearAll = () => {
+          clearCurrent();
      };
-
+     const onSubmitHandler = (event) => {
+          event.preventDefault();
+          if(current === null){
+               addContact(contact);
+          }
+          else{
+               updateContact(contact);
+          }
+          clearAll();
+     };
+    
      return (
+          
           <form onSubmit={onSubmitHandler}>
-               <h2>Add contact</h2>
+               <h2 className="text-primary">
+                    {
+                         current
+                         ?
+                         "Edit Contact"
+                         :
+                         "Add Contact"
+                    }
+               </h2>
 
                <input 
                type="text"
@@ -85,10 +110,24 @@ const ContactForm = () => {
                <div>
                     <input 
                     type="submit"
-                    value="Add Contact"
+                    value={
+                         current ? "Update Contact" :"Add Contact" 
+                    }
                     className="btn btn-primary btn-block"
                     />
                </div>
+               {
+                    current 
+                    &&
+                    <div>
+                         <button 
+                         className="btn btn-light btn-block"
+                         onClick={clearAll}
+                         >
+                              Clear
+                         </button>
+                    </div>
+               }
           </form>
      )
 }
