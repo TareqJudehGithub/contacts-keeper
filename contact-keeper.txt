@@ -197,3 +197,20 @@ $ npm install uuid                          // ID generator
 $ npm install react-transition-group       //Animator
 
 
+Inside /client/  folder:
+
+1. Setup Context
+     /components/context/
+     types.js
+     contactContext.js
+     ContactState.js
+     contactReducer.js
+
+2. create a /components/Contact folder
+     Contacts.jsx
+     ContactsItems.jsx
+     Contactsform.jsx
+
+3. import Contacts.jsx in Home.jsx
+
+

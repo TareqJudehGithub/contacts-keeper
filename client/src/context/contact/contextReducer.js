@@ -42,7 +42,21 @@ export default (state, action) => {
                     ...state,
                     current: null
                }
+          case FILTER_CONTACTS: 
+               return{
+                    ...state,
+                    filtered: state.contacts.filter(({name, email }) => {
+                         const filteredContact = `${name}${email}`
+                         .toLowerCase()
+                         return filteredContact.includes(action.payload.toLowerCase());
+                    })
+                    }
+          case CLEAR_FILTER:
+               return {
+                    ...state,
+                    filtered: null
+               }
           default:
                return state;
      }
-}
+};

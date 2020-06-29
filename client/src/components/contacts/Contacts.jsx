@@ -4,16 +4,29 @@ import ContactItems from "./ContactItems";
 
 const Contacts = () => {
      const contactContext = useContext(ContactContext);
-     const { contacts } = contactContext;
+     const { contacts, filtered } = contactContext;
+
+     if(contacts.length === 0){
+          return <h4>Your Contacts List is empty!</h4>
+     }
 
      return (
           <React.Fragment>
-               {contacts.map(contact => 
-                              <ContactItems 
+               {
+                    filtered !== null
+                    ?
+                    filtered.map(contact =>
+                         (<ContactItems 
                               key={contact.id}
                               contact={contact}
-                              />
-                         )}
+                         />))
+                    :
+                    contacts.map(contact => 
+                         <ContactItems 
+                         key={contact.id}
+                         contact={contact}
+                         />)
+               }
           </React.Fragment>
      )
 }
