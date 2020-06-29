@@ -32,7 +32,6 @@ const ContactFilter = () => {
                type="text"
                placeholder="Search contacts.."
                onChange={onChangeHandler}
-               // onSubmit={() => filterContacts(filtered)}
                />
           </form>
      )

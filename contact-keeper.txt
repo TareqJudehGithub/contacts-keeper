@@ -214,3 +214,6 @@ Inside /client/  folder:
 3. import Contacts.jsx in Home.jsx
 
 
+Animations for React:
+install react-transition-group
+
