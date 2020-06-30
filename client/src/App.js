@@ -4,13 +4,15 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import ContactState from "./context/contact/ContanctState";
+import AuthState from "./context/auth/AuthState";
 
 
 import './App.css';
 
 const App = () => {
   return (
-    <ContactState>
+    <AuthState>
+       <ContactState>
       <React.Fragment>
         <Navbar 
           title="Contact Keeper"
@@ -24,6 +26,8 @@ const App = () => {
         </div>
       </React.Fragment>
     </ContactState>
+    </AuthState>
+   
   );
 }
 
