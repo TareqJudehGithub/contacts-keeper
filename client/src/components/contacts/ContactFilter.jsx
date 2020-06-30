@@ -14,6 +14,7 @@ const ContactFilter = () => {
                filteredText.current.value = "";
           }
      });
+
      const onChangeHandler = event => {       
           // if the filter value is not empty, then run it:
           if(filteredText.current.value !== ""){
@@ -27,6 +28,7 @@ const ContactFilter = () => {
 
      return (
           <form>
+               <h2 className="text-primary">Contacts List</h2>
                <input 
                ref={filteredText}
                type="text"

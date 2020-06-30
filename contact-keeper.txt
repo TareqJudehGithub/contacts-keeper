@@ -217,3 +217,80 @@ Inside /client/  folder:
 Animations for React:
 install react-transition-group
 
+
+
+Add Contact 
+
+1. Implement the AddContact function in ContactState.js. and pass it to 
+     contactReducer.js
+
+2. in the frontend, create a new file /components/ContactsForm.jsx
+
+     In ContactsForm, import ContactContext and initialize it:
+     import ContactContext from "../context/ContactContext.js"
+
+     const contactContext = useContext(ContactContext);
+     const { addContact } = contactContext;
+
+3. Create a <form> with the needed <input>(s)
+
+4. declare a contact state using useState();
+     const [contact, setContact] = useState({
+          name: "",
+          email: "",
+          phone: "",
+          type: "personal"
+     });
+     const { name, email, phone, type } = contact;
+
+5. create a onChange and a onSubmit methods:
+
+     onChangeHandler = (event) => {
+          const { name, value } = event.target;
+          setContact({
+               ...contact,
+               [name]: value }
+          );
+     };
+
+     onSubmitHandler = (event) => {
+          
+          event.preventDefault();
+
+          addContact(contact);
+     };
+
+     return (
+          
+          <form onSubmit={onSubmitHandler}>
+               <h2  className="text-primary">Add Contacts</h2>
+               <input 
+                    type="text" name="name" value={name} placeholder="John Smith"
+                    onChange={onChangeHandler} required
+               />
+               <input 
+                    type="email" name="email" value={email} placeholder="Example@email.com"
+                    onChange={onChangeHandler} 
+               />
+               <input 
+                    type="text" name="phone" value={phone} placeholder="123-456-7890"
+                    onChange={onChangeHandler}
+               />
+               <h4><label htmlFor="radio">Contact type: </label></h4>
+               <input 
+                    type="radio" name="type" value="personal" checked={type === "personal"}
+                    onChange={onChangeHandler}
+               />{" "}
+                    <label htmlFor="personal">Personal{" "}</label>
+                    <input 
+                    type="radio" name="type" value="professional" checked={type === "professional"}
+                    onChange={onChangeHandler}
+               />{" "}
+                    <label htmlFor="professional">Professional</label>
+               <button 
+               className="btn btn-primary btn-block">Add Contact</button>
+          </form>
+     )
+
+
+6. Pass ContactsForm to /pages/home.jsx

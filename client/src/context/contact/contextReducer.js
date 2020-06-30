@@ -23,7 +23,7 @@ export default (state, action) => {
                          ?
                          action.payload
                          :
-                              contact
+                         contact
                     )
                }
           case DELETE_CONTACT:

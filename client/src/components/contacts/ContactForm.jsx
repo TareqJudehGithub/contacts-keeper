@@ -5,7 +5,9 @@ import ContactContext from '../../context/contact/contactContext';
 const ContactForm = () => {
 
      const contactContext = useContext(ContactContext);
-     const { addContact, updateContact, current, clearCurrent } = contactContext;
+     const { 
+          addContact, updateContact, current, clearCurrent, clearFilter 
+     } = contactContext;
      const [contact, setContact] = useState({
           name: "",
           email: "",
@@ -36,16 +38,20 @@ const ContactForm = () => {
                [name]: value 
           });
      };
+     
      const clearAll = () => {
           clearCurrent();
      };
+
      const onSubmitHandler = (event) => {
           event.preventDefault();
+
           if(current === null){
                addContact(contact);
           }
           else{
                updateContact(contact);
+               clearFilter();
           }
           clearAll();
      };
@@ -64,45 +70,33 @@ const ContactForm = () => {
                </h2>
 
                <input 
-               type="text"
-               placeholder="John Smith"
-               name="name"
-               value={name}
+                    type="text" placeholder="John Smith" name="name" value={name}
+                    onChange={onChangeHandler}
+                    required
+               />
+
+               <input 
+                    type="email" placeholder="Example@email.com" name="email"
+               value={email} 
                onChange={onChangeHandler}
                required
                />
 
-               <input 
-               type="email"
-               placeholder="Example@email.com"
-               name="email"
-               value={email}
+               <input type="text" placeholder="555-555- 5555" name="phone" value={phone}
                onChange={onChangeHandler}
                />
 
-               <input 
-               type="text"
-               placeholder="555-555- 5555"
-               name="phone"
-               value={phone}
-               onChange={onChangeHandler}
-               />
-
-               <h5>Contact Type</h5>
+               <h4>Contact Type</h4>
 
                <input 
-               type="radio"
-               name="type"
-               value="personal"
-               checked={type === "personal"}
-               onChange={onChangeHandler} 
+                    type="radio" name="type" value="personal"
+                    checked={type === "personal"}
+                    onChange={onChangeHandler} 
                />{" "}
                     Personal{" "}
 
                <input 
-               type="radio"
-               name="type"
-               value="professional"
+               type="radio" name="type" value="professional"
                checked={type=== "professional"}
                onChange={onChangeHandler} 
                />{" "}

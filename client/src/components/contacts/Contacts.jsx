@@ -8,14 +8,14 @@ const Contacts = () => {
      const { contacts, filtered } = contactContext;
 
      if(contacts.length === 0){
-          return <h4>Your Contacts List is empty!</h4>
+          return <h4 style={{textAlign: "center"}}>Your Contacts List is empty!</h4>
      }
 
      return (
           <React.Fragment>
                <TransitionGroup>
                {
-                    filtered !== null
+                    filtered
                     ?
                     filtered.map(contact =>
                          (

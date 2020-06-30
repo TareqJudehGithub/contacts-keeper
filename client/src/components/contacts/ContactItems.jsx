@@ -44,14 +44,14 @@ const ContactItems = ({ contact }) => {
                </ul>
                <p>
                     <button className="btn btn-primary btn-sm"
-                    onClick={() => setCurrent(contact)}>
+                         onClick={() => setCurrent(contact)}>
                          Edit
                     </button>
 
                     <button className="btn btn-danger btn-sm"
                     onClick={deleteContactHandler}
                     >
-                         Delete
+                         <i className="fas fa-trash"></i>
                     </button>
                </p>
           </div>
