@@ -30,8 +30,13 @@ const ContactFilter = () => {
           <form>
                <h2 className="text-primary">Contacts List</h2>
                <input 
+               style={{
+                    width: "100%",
+                    fontSize: "1.1em",
+                    padding: "0.3em"
+               }}
                ref={filteredText}
-               type="text"
+               type="search"
                placeholder="Search contacts.."
                onChange={onChangeHandler}
                />

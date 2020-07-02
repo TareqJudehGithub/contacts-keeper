@@ -7,7 +7,7 @@
 4. dependencies:
      A. $ npm install express
      B. $ npm install bcryptjs           //pass hashing
-     C. $ npm install jsonwebtoken    //authentication
+     C. $ npm install jsonwebtoken (JWT)   //authentication
      D. $ npm install config            //for global variables
      e. $ npm install express-validator //validates any data coming in.
      F. $ npm install mongoose   //MongoDB extractor
