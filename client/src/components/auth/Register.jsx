@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from "../../context/alert/alertContext";
-
+import AuthContext from "../../context/auth/authContext";
 
 const Register = () => {
-
+     
+     const authContext = useContext(AuthContext);
+     const { register, error, clearErrors } = authContext;
      const alertContext = useContext(AlertContext);
      const { setAlert } = alertContext;
      const [user, setUser] = useState({
@@ -14,6 +16,13 @@ const Register = () => {
      });
 
      const { name, email, password, password2 } = user;
+
+     useEffect(() => {
+          if(error === "User already exists"){
+               setAlert(error, "danger");
+               clearErrors();
+          }
+     }, [error]);  // only run error when state changes.
 
      const onChangeHandler = (event) => {
           const { name, value } = event.target;
@@ -38,7 +47,14 @@ const Register = () => {
                setAlert("Password and Confirm Password must match.", "danger");
           }
           else{
+               register({
+                    name: name,
+                    email: email,
+                    password: password
+               });
+
                console.log("Register Submit");
+
           }
      };
      

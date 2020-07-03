@@ -116,10 +116,6 @@ router.put("/:id", auth, async(req, res) => {
      }
 });
 
-
-
-
-
 // @route      POST      api/users/:id
 // @desc       Delete a user
 // @access     Private

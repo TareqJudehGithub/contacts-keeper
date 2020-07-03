@@ -291,6 +291,20 @@ Add Contact
                className="btn btn-primary btn-block">Add Contact</button>
           </form>
      )
-
-
 6. Pass ContactsForm to /pages/home.jsx
+
+
+Alerts
+
+1. Create the Alerts context in /context/
+2. create Alerts components in /layout/
+3. pass Alerts into App.js, and right above <Switch>
+4. in Register.jsx, import and pass AlertContext, create the needed conditional
+ functions.
+
+ 
+
+
+
+
+
