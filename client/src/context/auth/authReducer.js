@@ -10,7 +10,15 @@ import {
 } from "../types";
 
 const authReducer = (state, action) => {
+     
      switch(action.type){
+          case USER_LOADED:
+               return {
+                    ...state,
+                    isAuthenticated: true,
+                    loading: false,
+                    user: action.payload // user data
+               }
           case REGISTER_SUCCESS:
                // storing the token we receive in localstorage:
                localStorage.setItem("token", action.payload.token);
@@ -20,6 +28,7 @@ const authReducer = (state, action) => {
                     isAuthenticated: true,
                     loading: false
                }
+          case AUTH_ERROR:
           case REGISTER_FAIL:
                // remove token if registration failed:
                localStorage.removeItem("token");
@@ -28,7 +37,7 @@ const authReducer = (state, action) => {
                     token: null,
                     isAuthenticated: false,
                     loading: true,
-                    error: action.payload // catch payload
+                    error: action.payload 
                }
           case CLEAR_ERRORS:
                return{

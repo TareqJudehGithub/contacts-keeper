@@ -22,11 +22,11 @@ const AlertState = props => {
                type: SET_ALERT,
                payload: { msg, type, id }
           });
+          
+       // Remove Alert
           setTimeout(() => 
-          dispatch({ type: REMOVE_ALERT, payload: id  }), timeout) // payload: id to determine which ID to remove.
-     }
-
-     // Remove Alert
+          dispatch({ type: REMOVE_ALERT, payload: id  }), timeout); 
+     };
 
      return(
           <AlertContext.Provider 
