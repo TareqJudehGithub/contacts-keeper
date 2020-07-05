@@ -379,6 +379,32 @@ In AuthState, create a new method for registering users
      };
      export default authReducer;
 
+Adding a token (authentication) to registered users:
+
+1. under /src/  create /utils/setAuthToken.js
+     import axios from "axios";
+
+     if(localstorage.token){
+          axios.defaults.headers.common["x-auth-token] = token;
+     }
+     else{
+          delete axios.defaults.headers.common["x-auth-token];
+     }
+2. pass setAuthToken to App.js, before the function start line.
+
+create loadUser  in /context/auth.js
+
+pass loaduser function into register function after dispatch({})
+
+3. in /context/authReducer.js, pass loadUser dispatch types
+
+4. in /auth/register.js, pass isAuthenticated to authContext, and 
+pass it to useEffect() hook as a conditional to redirect to the Home
+after successfully registering a user.
+
+5. in /pages.home.js, pass loaduser as a useEffect() hook;
+
+
 
 
 

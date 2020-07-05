@@ -32,12 +32,13 @@ const AuthState = props => {
      // Load User (which user is logged in)
      const loadUser = async() => {
 
+          // set user token
           if(localStorage.token){
                setAuthToken(localStorage.token);
           }
 
           try {
-               const res = await axios.get("/api/auth");  // auth MW from backend (JWT)
+               const res = await axios.get("/api/auth"); 
 
                dispatch({
                     type: USER_LOADED,
@@ -69,14 +70,34 @@ const AuthState = props => {
            catch (error) {
                dispatch({
                     type: REGISTER_FAIL,
-                    payload: error.response.data.msg 
+                    payload: error.response.data.msg
                });
           }
      }
 
      // Login User
-     const login = () => console.log("Load user");
-
+     const login = async formData => {
+          const config = {
+               headers: {
+                    "Content-Type": "application/json"
+               }
+          }
+          try {
+               const res = await axios.post("/api/auth", formData ,config);
+               dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: res.data
+               });
+               loadUser();
+          } 
+          catch (error) {
+               dispatch({
+                    type: LOGIN_FAIL,
+                    payload: error.response.data.msg
+               });
+          }
+     };
+   
      // Logout User
      const logout = () => console.log("Sign out user");
      // Clear Errors

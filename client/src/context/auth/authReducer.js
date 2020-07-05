@@ -19,6 +19,7 @@ const authReducer = (state, action) => {
                     loading: false,
                     user: action.payload // user data
                }
+          case LOGIN_SUCCESS:
           case REGISTER_SUCCESS:
                // storing the token we receive in localstorage:
                localStorage.setItem("token", action.payload.token);
@@ -28,6 +29,7 @@ const authReducer = (state, action) => {
                     isAuthenticated: true,
                     loading: false
                }
+          case LOGIN_FAIL:
           case AUTH_ERROR:
           case REGISTER_FAIL:
                // remove token if registration failed:
@@ -47,5 +49,5 @@ const authReducer = (state, action) => {
           default:
                return state;
      }
-}
+};
 export default authReducer;

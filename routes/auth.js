@@ -9,7 +9,6 @@ const User = require("../models/User");
 const auth = require("../middleware/auth");
 
 
-
 // @route      GET  api/auth
 // @desc       GET  logged in user
 // @access     Private
@@ -23,7 +22,7 @@ router.get("/", auth, async (req, res) => {
      } 
      catch (error) {
           console.log(error.message);
-          res.status(500).json(" Server Error! GET /api/auth");
+          res.status(500).json("Server Error! GET /api/auth");
      }
 });
 

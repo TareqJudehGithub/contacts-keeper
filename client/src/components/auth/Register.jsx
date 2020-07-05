@@ -68,7 +68,8 @@ const Register = (props) => {
                          <label htmlFor="name">Name</label>
                          <input type="text" name="name" value={name}
                               placeholder="John Smith" autoComplete="name"
-                              onChange={onChangeHandler} required
+                              autoFocus required
+                              onChange={onChangeHandler}  
                          />
                     </div>
 

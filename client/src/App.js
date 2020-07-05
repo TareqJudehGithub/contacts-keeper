@@ -31,13 +31,13 @@ const App = () => {
               icon="fas fa-id-card-alt"
             />
             <div className="container">
-              <Alert />
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login}/>
               </Switch>
+              <Alert />
             </div>
           </React.Fragment>
         </AlertState>
