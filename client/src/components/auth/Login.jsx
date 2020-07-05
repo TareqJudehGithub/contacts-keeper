@@ -23,18 +23,18 @@ const Login = (props) => {
                clearErrors();
           }
           // eslint-disable-next-line
-     },[isAuthenticated, props.history]);
+     },[error, isAuthenticated, props.history]);
 
-     const [user, setuser] = useState({
+     const [user, setUser] = useState({
           email: "",
           password: ""
      });
 
-     const { email, password} = user;
+     const { email, password } = user;
 
      const onChangeHandler = event => {
           const { name, value } = event.target;
-          setuser({
+          setUser({
                ...user,
                [name]: value
           });
@@ -46,7 +46,7 @@ const Login = (props) => {
                     email: email,
                     password: password
                });
-               setuser({
+               setUser({
                     email: "",
                     password: ""
                })
@@ -71,6 +71,7 @@ const Login = (props) => {
                          onChange={onChangeHandler} 
                    />
               </div>
+
               <input type="submit" value="Sign In"
               className="btn btn-primary btn-block"
               />
