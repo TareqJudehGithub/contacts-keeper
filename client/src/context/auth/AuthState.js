@@ -10,7 +10,7 @@ import {
      LOGIN_SUCCESS,
      LOGIN_FAIL,
      LOGOUT,
-     CLEAR_ERRORS
+     CLEAR_ERROR
 } from "../types";
 import authReducer from "./authReducer";
 import AuthContext from "./authContext";
@@ -50,7 +50,7 @@ const AuthState = props => {
                     type: AUTH_ERROR
                })
           }
-     }
+     };
    
      // Register User
      const register = async formData => {
@@ -106,7 +106,7 @@ const AuthState = props => {
      };
      
      // Clear Errors
-     const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+     const clearError = () => dispatch({ type: CLEAR_ERROR });
 
      return(
           <AuthContext.Provider 
@@ -120,7 +120,7 @@ const AuthState = props => {
                loadUser,
                login,
                logout,
-               clearErrors
+               clearError
           }}
           >
                {props.children}

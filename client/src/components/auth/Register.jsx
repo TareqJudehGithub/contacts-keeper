@@ -5,7 +5,7 @@ import AuthContext from "../../context/auth/authContext";
 const Register = (props) => {
      
      const authContext = useContext(AuthContext);
-     const { register, error, clearErrors, isAuthenticated } = authContext;
+     const { register, error, clearError, isAuthenticated } = authContext;
      const alertContext = useContext(AlertContext);
      const { setAlert } = alertContext;
      const [user, setUser] = useState({
@@ -23,7 +23,7 @@ const Register = (props) => {
           }
           if(error === "User already exists"){
                setAlert(error, "danger");
-               clearErrors();
+               clearError();
           }
           // eslint-disable-next-line
      }, [error, isAuthenticated, props.history]);  // only run error when state changes.

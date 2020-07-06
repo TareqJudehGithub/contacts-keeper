@@ -6,7 +6,7 @@ import AlertContext from "../../context/alert/alertContext";
 const Login = (props) => {
 
      const authContext = useContext(AuthContext);
-     const { login, error, clearErrors, isAuthenticated } = authContext;
+     const { login, error, clearError, isAuthenticated } = authContext;
      const alertContext = useContext(AlertContext);
      const { setAlert } = alertContext;
      
@@ -16,11 +16,11 @@ const Login = (props) => {
           }    
           if(error === "User does not exist!"){
                setAlert(error, "danger"); 
-               clearErrors();
+               clearError();
           }
           if(error === "Invalid username or password!"){
                setAlert(error, "danger");
-               clearErrors();
+               clearError();
           }
           // eslint-disable-next-line
      },[error, isAuthenticated, props.history]);
