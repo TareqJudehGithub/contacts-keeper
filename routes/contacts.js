@@ -20,7 +20,7 @@ router.get("/", auth, async (req, res) => {
                res.json(contacts);
      } 
      catch (error) {
-          res.status(500).json("Server Error! GET /api/contacts")
+          res.status(500).json({ msg: "Server Error! GET /api/contacts" })
      }
 });
 

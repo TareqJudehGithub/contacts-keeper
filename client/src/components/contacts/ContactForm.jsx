@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
+import AlertAuth from '../../context/alert/alertContext';
 
 
 const ContactForm = () => {
 
      const contactContext = useContext(ContactContext);
      const { 
-          addContact, updateContact, current, clearCurrent, clearFilter
+          addContact, updateContact, current, clearCurrent,
+           clearFilter, contacts, error, clearError
      } = contactContext;
      const [contact, setContact] = useState({
           name: "",
@@ -15,8 +17,16 @@ const ContactForm = () => {
           type: "personal"
      });
      const { name, email, phone, type } = contact;
-     
+     const alertContext = useContext(AlertAuth);
+     const { setAlert } = alertContext;
+
+
      useEffect(() => {
+          if(error === "Error! Contact already exists!"){
+               setAlert(error, "danger");
+               clearError();
+               
+          }
           if(current !== null) {
                setContact(current);
           }
@@ -28,6 +38,7 @@ const ContactForm = () => {
                     type: "personal"
                });
           }
+           // eslint-disable-next-line
      }, [contactContext, current]);
 
 
@@ -46,6 +57,9 @@ const ContactForm = () => {
      const onSubmitHandler = (event) => {
           event.preventDefault();
 
+          if(contacts.email === true){
+               setAlert(error, "danger")
+          }
           if(current === null){
                addContact(contact);
           }

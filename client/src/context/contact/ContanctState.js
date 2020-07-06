@@ -5,14 +5,15 @@ import axios from "axios";
 import ContactContext from "./contactContext";
 import contactReducer from "./contactReducer";
 import {
-     ADD_CONTACT, DELETE_CONTACT, CONTACT_ERROR, UPDATE_CONTACT,
+     GET_CONTACTS, ADD_CONTACT,  UPDATE_CONTACT, DELETE_CONTACT, 
+     CONTACT_ERROR,  CLEAR_CONTACTS,
      SET_CURRENT, CLEAR_CURRENT,
-     FILTER_CONTACTS, CLEAR_FILTER
+     FILTER_CONTACTS, CLEAR_FILTER,  CLEAR_ERROR
 } from "../types";
 
 const ContactState = props => {
      const INITIAL_STATE = {
-          contacts: [],
+          contacts: null,
           current: null,
           filtered: null,
           error: null
@@ -21,6 +22,29 @@ const ContactState = props => {
      const [state, dispatch ] = useReducer(contactReducer, INITIAL_STATE);
 
      // actions:
+
+     // Get contacts:
+     const getContacts = async () => {
+
+          try {
+               const res = await axios.get("/api/contacts");
+               dispatch({
+                    type: GET_CONTACTS,
+                    payload: res.data
+               });
+          } catch (error) {
+               dispatch({
+                    type: CONTACT_ERROR,
+                    payload: error.response.data.msg
+               });
+          }
+     };
+     // Clear Contacts list:
+     const clearContact = () => {
+          dispatch({
+               type: CLEAR_CONTACTS
+          });
+     };
 
      // Add contact:
      const addContact = async contact => {
@@ -39,7 +63,7 @@ const ContactState = props => {
           } catch (error) {
                dispatch({
                     type: CONTACT_ERROR,
-                    dispatch: error.response.data.msg
+                    payload: error.response.data.msg
                });
           }
      };
@@ -86,7 +110,12 @@ const ContactState = props => {
                type: CLEAR_FILTER
           });
      };
-
+     // Clear Error:
+     const clearError = () => {
+          dispatch({
+               type: CLEAR_ERROR
+          });
+     }
      return(
           <ContactContext.Provider
           value={{
@@ -94,13 +123,16 @@ const ContactState = props => {
                current: state.current,
                filtered: state.filtered,
                error: state.error,
+               getContacts,
                addContact,
                deleteContact,
+               clearContact,
                setCurrent,
                clearCurrent,
                updateContact,
                filterContacts,
-               clearFilter
+               clearFilter,
+               clearError
           }} 
           >
                {props.children}
