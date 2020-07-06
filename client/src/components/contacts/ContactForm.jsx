@@ -6,7 +6,7 @@ const ContactForm = () => {
 
      const contactContext = useContext(ContactContext);
      const { 
-          addContact, updateContact, current, clearCurrent, clearFilter 
+          addContact, updateContact, current, clearCurrent, clearFilter
      } = contactContext;
      const [contact, setContact] = useState({
           name: "",

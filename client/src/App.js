@@ -13,7 +13,6 @@ import Login from "./components/auth/Login";
 import Alert from "./components/layout/Alert";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import SignedIn from "./components/routing/SignedIn";
-
 import setAuthToken from "./utils/setAuthToken";
 
 import './App.css';
@@ -23,6 +22,7 @@ if(localStorage.token){
 }
 
 const App = () => {
+
   return (
     <AuthState>
       <ContactState>
@@ -36,7 +36,7 @@ const App = () => {
               <Switch>
                 <PrivateRoute exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
-                <Route exact path="/register" component={Register} />
+                <SignedIn exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login}/>
               </Switch>
               <Alert />

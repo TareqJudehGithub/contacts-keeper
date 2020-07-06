@@ -5,16 +5,15 @@ import { Route, Redirect } from "react-router-dom";
 const SignedIn = ({ component: Component, ...rest }) => {
 
      const authContext = useContext(AuthContext);
-     const { isAuthenticated, loading} = authContext;
-
-     return (
+     const { isAuthenticated } = authContext;
+     return (  
           <Route 
                {...rest} 
                render={props =>
                     isAuthenticated 
                     ?
                     (
-                         <Redirect to="/login" />
+                         <Redirect to="/" />
                     )
                     :
                     (

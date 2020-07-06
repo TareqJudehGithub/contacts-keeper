@@ -49,7 +49,7 @@ router.post("/",
           try {
                let newContact = await Contact.findOne({ email: email});
                if(newContact){
-                    res.status(400).json("Error! Contact already exists!");
+                    res.status(400).json({ msg: "Error! Contact already exists!" });
                     return;
                }
                newContact = new Contact({
