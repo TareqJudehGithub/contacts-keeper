@@ -10,7 +10,7 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import Alert from "./components/layout/Alert";
+
 import PrivateRoute from "./components/routing/PrivateRoute";
 import SignedIn from "./components/routing/SignedIn";
 import setAuthToken from "./utils/setAuthToken";
@@ -39,7 +39,6 @@ const App = () => {
                 <SignedIn exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login}/>
               </Switch>
-              <Alert />
             </div>
           </React.Fragment>
         </AlertState>

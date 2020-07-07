@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
-import AlertAuth from '../../context/alert/alertContext';
-
+import AlertContext from '../../context/alert/alertContext';
+import Alert from "../layout/Alert";
 
 const ContactForm = () => {
 
      const contactContext = useContext(ContactContext);
      const { 
           addContact, updateContact, current, clearCurrent,
-           clearFilter, contacts, error, clearError
+           clearFilter, error, clearError
      } = contactContext;
      const [contact, setContact] = useState({
           name: "",
@@ -17,15 +17,16 @@ const ContactForm = () => {
           type: "personal"
      });
      const { name, email, phone, type } = contact;
-     const alertContext = useContext(AlertAuth);
+     const alertContext = useContext(AlertContext);
      const { setAlert } = alertContext;
 
-
+    
      useEffect(() => {
-          if(error === "Error! Contact already exists!"){
+          
+          if(error === "Error! Contact already exists!" ||
+               error === "Update Error! PUT /api/contacts"){
                setAlert(error, "danger");
                clearError();
-               
           }
           if(current !== null) {
                setContact(current);
@@ -57,9 +58,6 @@ const ContactForm = () => {
      const onSubmitHandler = (event) => {
           event.preventDefault();
 
-          if(contacts.email === true){
-               setAlert(error, "danger")
-          }
           if(current === null){
                addContact(contact);
           }
@@ -72,7 +70,8 @@ const ContactForm = () => {
     
      return (
           
-          <form onSubmit={onSubmitHandler}>
+        <React.Fragment>
+               <form onSubmit={onSubmitHandler}>
                <h2 className="text-primary">
                     {
                          current
@@ -96,7 +95,9 @@ const ContactForm = () => {
                required
                />
 
-               <input type="text" placeholder="555-555- 5555" name="phone" value={phone}
+               <input 
+                style={{ width: "100%", fontSize: "1.1em", padding: "0.3em" }}
+               type="number" placeholder="000-111-2222" name="phone" value={phone}
                onChange={onChangeHandler}
                />
 
@@ -136,7 +137,10 @@ const ContactForm = () => {
                          </button>
                     </div>
                }
+               <Alert />
           </form>
+       
+        </React.Fragment>
      )
 }
 

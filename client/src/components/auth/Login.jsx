@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
-
+import Alert from "../layout/Alert";
 
 const Login = (props) => {
 
@@ -53,7 +53,8 @@ const Login = (props) => {
           };
           
      return (
-
+          <React.Fragment>
+               
          <form className="form-container" onSubmit={onSubmitHandler}>
               <h1 className="text-primary">Sign In</h1>
 
@@ -75,8 +76,10 @@ const Login = (props) => {
               <input type="submit" value="Sign In"
               className="btn btn-primary btn-block"
               />
-
+               <Alert />
          </form>
+      
+          </React.Fragment>
      )
 }
 

@@ -23,7 +23,7 @@ export default (state, action) => {
           case ADD_CONTACT:
                return{
                     ...state,
-                    contacts: [...state.contacts, action.payload],
+                    contacts: [action.payload, ...state.contacts, ],
                     loading: false
                }
           case UPDATE_CONTACT:
@@ -79,7 +79,7 @@ export default (state, action) => {
           case CLEAR_ERROR:
                return {
                     ...state,
-                    error: action.payload
+                    error: null
                }
           default:
                return state;

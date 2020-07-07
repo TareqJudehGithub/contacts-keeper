@@ -17,8 +17,7 @@ const Contacts = () => {
      if(contacts !== null && contacts.length === 0 && !loading){
           return <h4 style={{textAlign: "center"}}>Your Contacts List is empty!</h4>
      }
-     contacts &&  console.log(contacts.length)
-
+     
      return (
           <React.Fragment>
                {

@@ -102,7 +102,7 @@ router.put("/:id", auth, async(req, res) => {
      }              
       catch (error) {
           console.log(error.message);
-          res.status(500).json("Server Error! PUT /api/contacts");
+          res.status(500).json({ msg: "Update Error! PUT /api/contacts" });
      }
 });
 
