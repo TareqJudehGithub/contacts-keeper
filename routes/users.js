@@ -22,20 +22,24 @@ router.get("/", async(req, res) => {
 // @access     Public
 router.post("/", [
      
-     check("name", "Please enter a valid name.")
+     check("name", "Name must not be empty!")
           .not()      // the not empty validation
           .isEmpty(), 
+          check("name", "Name must be between 2 and 150 characters.")
+          .isLength({ min: 2, max: 150}),
+     check("name", "Name must only contain letters.")
+          .matches(/^[A-Za-z\s]+$/).withMessage('Name must not contain numbers or symbols.')
+          .bail(),
 
      check("email", "Please enter a valid email address.")
           .isEmail(),
-
      check("password", "Please enter a valid username/password.")
           .isLength({ min: 6 })
      ],
      async (req, res) => {
           const errors =validationResult(req);
           if(!errors.isEmpty()) { 
-               return res.status(400).json({ errorrs: errors.array() });
+               return res.status(400).json({ msg: errors.array()[0].msg });
           }
           const { name, email, password } = req.body;
           try {

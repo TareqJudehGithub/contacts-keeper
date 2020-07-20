@@ -21,7 +21,7 @@ const Register = (props) => {
           if(isAuthenticated){
                props.history.push("/");
           }
-          if(error === "User already exists"){
+          if(error){
                setAlert(error, "danger");
                clearError();
           }
@@ -68,7 +68,7 @@ const Register = (props) => {
                          <label htmlFor="name">Name</label>
                          <input type="text" name="name" value={name}
                               placeholder="John Smith" autoComplete="name"
-                              autoFocus required
+                              autoFocus 
                               onChange={onChangeHandler}  
                          />
                     </div>
@@ -77,7 +77,7 @@ const Register = (props) => {
                          <label htmlFor="email" name="email">Email Address</label>
                          <input type="email" name="email" value={email}
                               placeholder="example@email.com" autoComplete="email"
-                              onChange={onChangeHandler} required
+                              onChange={onChangeHandler} 
                          />
                     </div>
 
@@ -87,7 +87,7 @@ const Register = (props) => {
                               type="password" name="password" value={password}
                               placeholder="Must have at least 6 characters" 
                               autoComplete="password"
-                              minLength="6" maxLength="12" required 
+                              minLength="6" maxLength="12"  
                               onChange={onChangeHandler}
                          />
                     </div>
